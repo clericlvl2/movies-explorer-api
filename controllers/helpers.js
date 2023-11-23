@@ -8,7 +8,7 @@ const MongooseError = mongoose.Error;
 const getExistingPropsByKeys = (obj = {}, keysToCheck = []) => {
   const filteredObj = {};
 
-  keysToCheck.forEach(key => {
+  keysToCheck.forEach((key) => {
     if (obj[key]) {
       filteredObj[key] = obj[key];
     }

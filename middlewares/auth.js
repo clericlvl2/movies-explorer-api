@@ -9,7 +9,6 @@ const throwAuthError = () => {
   throw new UnauthorizedError(message);
 };
 
-// eslint-disable-next-line consistent-return
 module.exports = (req, res, next) => {
   const jwtToken = req.cookies.jwt;
   const isLogged = Boolean(jwtToken);

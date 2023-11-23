@@ -5,7 +5,6 @@ const errorConsoleLogger = (err, req, res, next) => {
   next(err);
 };
 
-// eslint-disable-next-line no-unused-vars
 const globalErrorHandler = (err, req, res, next) => {
   const {
     statusCode = HTTP_ERROR.SERVER.status,
@@ -13,6 +12,7 @@ const globalErrorHandler = (err, req, res, next) => {
   } = err;
 
   res.status(statusCode).json({ message });
+  next();
 };
 
 module.exports = {

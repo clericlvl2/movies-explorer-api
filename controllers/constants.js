@@ -30,6 +30,12 @@ const MOVIE_SCHEMA_FIELDS = [
 const MOVIES_LIMIT = 30;
 const CREATION_DATE_SORT_CONFIG = { createdAt: -1 };
 
+const MESSAGES = {
+  successfulLogin: 'Пользователь вошёл в систему',
+  successfulLogout: 'Пользователь вышел из системы',
+  successfulDelete: 'Фильм был удалён',
+};
+
 module.exports = {
   SALT_ROUNDS,
   MODEL_UPDATE_OPTIONS,
@@ -38,4 +44,5 @@ module.exports = {
   MOVIE_SCHEMA_FIELDS,
   MOVIES_LIMIT,
   CREATION_DATE_SORT_CONFIG,
+  MESSAGES,
 };

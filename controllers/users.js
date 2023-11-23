@@ -29,7 +29,11 @@ const updateUser = async (req, res, next) => {
     checkResponse(updatedUser, userError.notFound);
     res.send({ data: updatedUser });
   } catch (err) {
-    next(processError(err, userError.invalidDataOnUpdate));
+    const error = err.code === 11000
+      ? new ConflictError(userError.invalidEmailOnUpdate)
+      : processError(err, userError.invalidDataOnUpdate);
+
+    next(error);
   }
 };
 

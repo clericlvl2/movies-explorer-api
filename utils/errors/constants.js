@@ -41,8 +41,9 @@ const ERROR_MESSAGE = {
       'Переданы некорректные данные при создании пользователя.',
     invalidDataOnUpdate:
       'Переданы некорректные данные при обновлении профиля.',
-    invalidEmailOrPassword: 'Неправильные почта или пароль.',
     invalidEmailOnSignUp: 'Пользователь с такой почтой уже существует',
+    invalidEmailOnUpdate: 'Такая почта уже зарегистрирована',
+    invalidEmailOrPassword: 'Неправильные почта или пароль.',
     invalidEmail: 'Почта указана не верно',
   },
   movies: {

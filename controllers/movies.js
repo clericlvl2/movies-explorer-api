@@ -5,15 +5,15 @@ const { checkResponse, processError } = require('./helpers');
 const {
   MOVIES_LIMIT,
   CREATION_DATE_SORT_CONFIG,
-  MOVIE_SCHEMA_FIELDS,
+  MOVIE_SCHEMA_FIELDS, MESSAGES,
 } = require('./constants');
 
 const movieError = ERROR_MESSAGE.movies;
 
-const getMovieData = req => {
+const getMovieData = (req) => {
   const data = {};
 
-  MOVIE_SCHEMA_FIELDS.forEach(field => {
+  MOVIE_SCHEMA_FIELDS.forEach((field) => {
     data[field] = req.body[field];
   });
 
@@ -22,7 +22,8 @@ const getMovieData = req => {
 
 const getMovies = async (req, res, next) => {
   try {
-    const movies = await Movie.find({})
+    const userId = req.user._id;
+    const movies = await Movie.find({ owner: userId })
       .sort(CREATION_DATE_SORT_CONFIG)
       .limit(MOVIES_LIMIT)
       .populate('owner');
@@ -36,7 +37,6 @@ const getMovies = async (req, res, next) => {
 const createMovie = async (req, res, next) => {
   try {
     const movieData = getMovieData(req);
-    console.log(movieData);
     const userId = req.user._id;
     const movie = await Movie.create({ ...movieData, owner: userId });
     await Movie.populate(movie, 'owner');
@@ -48,9 +48,8 @@ const createMovie = async (req, res, next) => {
 };
 
 const deleteMovie = async (req, res, next) => {
-  const { movieId } = req.params;
-
   try {
+    const { movieId } = req.params;
     const movie = await Movie.findById(movieId);
 
     checkResponse(movie, movieError.notFound);
@@ -64,7 +63,9 @@ const deleteMovie = async (req, res, next) => {
 
     await Movie.deleteById(movieId);
 
-    res.send({});
+    const message = MESSAGES.successfulDelete;
+
+    res.send({ message });
   } catch (err) {
     next(processError(err, movieError.notFound));
   }

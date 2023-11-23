@@ -11,10 +11,14 @@ const limiter = require('./middlewares/limiter');
 const cors = require('./middlewares/cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { errorConsoleLogger, globalErrorHandler } = require('./controllers/errors');
+const { DEFAULT_PORT, DEFAULT_DB_ADDRESS } = require('./utils/constants');
 
 const app = express();
 
-const { PORT = 3000 } = process.env;
+const {
+  PORT = DEFAULT_PORT,
+  MOVIES_DB = DEFAULT_DB_ADDRESS,
+} = process.env;
 
 app.use(limiter);
 app.use(helmet());
@@ -23,7 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-mongoose.connect('mongodb://127.0.0.1/bitfilmsdb', {
+mongoose.connect(MOVIES_DB, {
   useNewUrlParser: true,
 });
 

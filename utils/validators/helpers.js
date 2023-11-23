@@ -13,14 +13,14 @@ const validateEmail = Joi.string().email();
 const validateURL = Joi.string().regex(urlRegex);
 const validateObjectId = Joi.objectId();
 
-const paramsIdValidator = id => celebrate({
+const paramsIdValidator = (id) => celebrate({
   params: Joi.object().keys({
     [id]: Joi.objectId(),
   }),
 });
 
-const validateSchemaURL = value => urlRegex.test(value);
-const validateSchemaEmail = value => isEmail(value);
+const validateSchemaURL = (value) => urlRegex.test(value);
+const validateSchemaEmail = (value) => isEmail(value);
 
 module.exports = {
   validateText,
