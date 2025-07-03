@@ -1,11 +1,41 @@
-# movies-explorer-api
+# Movies Explorer API
 
-Репозиторий для бэкенда проекта `movies-explorer`. Реализован следующий функционал: авторизации и регистрации пользователей, операции с фильмами и пользователями.
+Backend для приложения с управлением коллекцией фильмов и авторизацией пользователей.
 
-Адрес репозитория: https://github.com/clericlvl2/movies-explorer-api
+## Функционал
 
-## Ссылки на проект
+- Регистрация и авторизация пользователей
+- Сохранение и удаление фильмов
+- Управление профилем пользователя
 
-IP 84.201.128.249
+## Технологии
 
-Backend https://api.clericlvl2.movies.nomoredomainsmonster.ru
+- Node.js + Express
+- MongoDB + Mongoose
+- JWT авторизация
+- Валидация данных (Joi/Celebrate)
+- Логирование (Winston)
+- Защита от атак (Helmet, Rate Limiting)
+
+## API Endpoints
+
+### Авторизация
+- `POST /signup` - регистрация
+- `POST /signin` - вход
+- `DELETE /signout` - выход
+
+### Пользователи
+- `GET /users/me` - данные пользователя
+- `PATCH /users/me` - обновление профиля
+
+### Фильмы
+- `GET /movies` - получить сохранённые фильмы
+- `POST /movies` - сохранить фильм
+- `DELETE /movies/:movieId` - удалить фильм
+
+## Запуск
+
+```bash
+npm install
+npm start
+```
